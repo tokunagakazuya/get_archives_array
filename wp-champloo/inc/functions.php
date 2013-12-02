@@ -62,6 +62,8 @@ if(!function_exists('get_archives_array')){
 
 		if($period == 'monthly'){
 				$query = "SELECT YEAR(post_date) AS 'year', MONTH(post_date) AS 'month', count(ID) as posts FROM $wpdb->posts $join $where GROUP BY YEAR(post_date), MONTH(post_date) ORDER BY post_date DESC $limit";
+		}elseif($period == 'daily'){
+				$query = "SELECT YEAR(post_date) AS 'year', MONTH(post_date) AS 'month', DAY(post_date) AS 'day', count(ID) as posts FROM $wpdb->posts $join $where GROUP BY YEAR(post_date), MONTH(post_date), DAY(post_date) ORDER BY post_date DESC $limit";
 		}elseif($period == 'yearly'){
 			$query = "SELECT YEAR(post_date) AS 'year', count(ID) as posts FROM $wpdb->posts $join $where GROUP BY YEAR(post_date) ORDER BY post_date DESC $limit";
 		}
